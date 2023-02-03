@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+		<script src="app.js" type="module"></script>
+
+		<link rel="stylesheet" href="styles.css" />
+		<link rel="stylesheet" href="status.css" />
+
+		<title>Участки</title>
+	</head>
+	<body>
+		<section id="main-screen" class="screen">
+			<div class="screen-header">
+				<h1>Участки</h1>
+				<button id="main-settings">Настройки</button>
+			</div>
+			<div id="main-locations"></div>
+		</section>
+
+		<section id="visits-screen" class="screen">
+			<div class="screen-header">
+				<h1 id="visits-title"></h1>
+				<button id="visits-refresh">Обновить</button>
+			</div>
+			<div id="visits-accommodations"></div>
+		</section>
+
+		<section id="settings-screen" class="screen">
+			<div class="screen-header">
+				<h1>Настройки</h1>
+				<button id="settings-save">Сохранить</button>
+			</div>
+			<div>
+				<label>Инициалы</label>
+				<input id="settings-initials" type="text" minlength="2" maxlength="2" placeholder="ФИ" required />
+			</div>
+			<div>
+				<label>Agent Deployment ID</label>
+				<input id="settings-deployment" type="text" placeholder="Agent Deployment ID" required />
+			</div>
+			<div>
+				<label>Участки</label>
+				<div id="settings-sheets"></div>
+				<input id="settings-href" type="url" placeholder="Google Sheet URL" required />
+				<a href="" id="settings-add">+</a>
+			</div>
+		</section>
+
+		<div id="status-dialog" class="dialog">
+			<div class="dialog-frame">
+				<div class="dialog-header">
+					<h1 class="status-no"></h1>
+				</div>
+				<div class="status-menu">
+					<div class="status-button" data-status="НД1">НД1</div>
+					<div class="status-button" data-status="НД2">НД2</div>
+					<div class="status-button" data-status="НД3">НД3</div>
+					<div class="status-button" data-status="ПП">ПП</div>
+					<div class="status-button" data-status="ОТК">ОТК</div>
+					<div class="status-button" data-status="ПИС">ПИС</div>
+				</div>
+			</div>
+		</div>
+
+		<template id="accommodation-template">
+			<div class="accommodation status-button">
+				<span class="initials"></span>
+				<span class="no"></span>
+				<span class="status"></span>
+				<span class="modify-date"></span>
+			</div>
+		</template>
+
+		<template id="sheet-template">
+			<div class="sheet">
+				<span class="sheet-name"></span>
+				<a href="" class="sheet-remove">-</a>
+			</div>
+		</template>
+	</body>
+</html>

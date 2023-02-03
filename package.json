@@ -1,0 +1,23 @@
+{
+  "name": "terra",
+  "version": "1.0.0",
+  "description": "JW Territory service frontend.",
+  "main": "main.js",
+  "dependencies": {},
+  "devDependencies": {
+    "express": "^4.18.2"
+  },
+  "scripts": {
+	"start": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yplaksyuk/terra.git"
+  },
+  "author": "Yuri Plaksyuk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yplaksyuk/terra/issues"
+  },
+  "homepage": "https://github.com/yplaksyuk/terra#readme"
+}

@@ -1,0 +1,35 @@
+
+.status-button[data-status="НД1"] {
+    background-color: lightgray;
+	color: black;
+}
+
+.status-button[data-status="НД2"] {
+    background-color: darkgray;
+	color: black;
+}
+
+.status-button[data-status="НД3"] {
+    background-color: gold;
+	color: black;
+}
+
+.status-button[data-status="ПП"] {
+    background-color: green;
+	color: white;
+}
+
+.status-button[data-status="ОТК"] {
+    background-color: crimson;
+	color: white;
+}
+
+.status-button[data-status="ПИС"] {
+    background-color: blueviolet;
+	color: white;
+}
+
+.status-button[data-status="!!!"] {
+    background-color: black;
+	color: white;
+}
