@@ -11,7 +11,7 @@ const updateLocations = () => {
 
 	agent.getSheets().forEach(item => {
 		const data = agent.readSheet(item.sheet);
-		if (data) {
+		if (data?.locations) {
 			for (let location = 0; location < data.locations.length; ++location) {
 				$('<button class="location"></button>')
 					.data('item', { sheet: item.sheet, location })
@@ -89,10 +89,6 @@ $(function() {
 			$('#status-dialog').addClass('dialog-shown');
 		});
 
-	$('#settings-initials')
-		.on('change', function() { agent.setInitials($(this).val()); })
-		.on('sync', function() { $(this).val(agent.getInitials()); });
-
 	$('#settings-deployment')
 		.on('change', function() { agent.setDeployment($(this).val()); })
 		.on('sync', function() { $(this).val(agent.getDeployment()); });
@@ -119,6 +115,15 @@ $(function() {
 			}
 		});
 
+	$('#settings-share').on('click', function() {
+		let url = location.href;
+		if (url.endsWith('/')) url += 'index.html';
+		url += `#${agent.getDeployment()}`;
+		for (const item of agent.getSheets())
+			url += `+${item.sheet}`;
+		navigator.share({ url });
+	});
+
 	$('#settings-save').on('click', function() {
 		if (agent.ok())
 			showScreen('main');
@@ -137,10 +142,22 @@ $(function() {
 			$(this).removeClass('dialog-shown');
 		});
 
-	$('input').trigger('sync');
+	const init = () => {
+		$('input').trigger('sync');
 
-	updateSheets();
-	updateLocations();
+		updateSheets();
+		updateLocations();
 
-	showScreen(agent.ok() ? 'main' : 'settings');
+		showScreen(agent.ok() ? 'main' : 'settings');
+	};
+
+	if (location.hash)
+		agent.importConfig(location.hash)
+			.then(() => {
+				window.history.replaceState(null, '', location.origin + location.pathname);
+				init();
+			})
+			.catch(init);
+	else
+		init();
 });

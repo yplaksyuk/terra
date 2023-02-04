@@ -7,34 +7,27 @@ $.ajaxSetup({
 	dataType: 'json',
 });
 
-const config = Object.assign({ initials: '', deployment: '', sheets: [] },
+const config = Object.assign({ deployment: '', sheets: [] },
 	JSON.parse(storage.getItem(CONFIG)));
 
 const saveConfig = () => {
 	storage.setItem(CONFIG, JSON.stringify(config));
 };
 
-const url = (sheet) => {
-	if (config.deployment) {
-		const url = `https://script.google.com/macros/s/${config.deployment}/exec?sheet=${sheet}`;
-		console.log(url);
-		return url;
-	}
+const url = () => {
+	if (config.deployment)
+		return `https://script.google.com/macros/s/${config.deployment}/exec`;
 
 	throw Error('deployment ID not defined.');
 };
 
 const getSheet = (sheet) => new Promise((resolve, reject) => {
-	$.get(url(sheet))
+	$.get(url(), { x: sheet })
 		.done((data) => { storage.setItem(sheet, JSON.stringify(data)); resolve(data); })
 		.fail(() => { reject(); });
 });
 
-export const ok = () => config.initials && config.deployment && true;
-
-export const getInitials = () => config.initials;
-
-export const setInitials = (initials) => { config.initials = initials; saveConfig(); };
+export const ok = () => config.deployment && true;
 
 export const getDeployment = () => config.deployment;
 
@@ -80,10 +73,10 @@ export const refreshSheet = async (sheet) => {
 };
 
 export const setSheet = (sheet, location, accommodation, status, note) => new Promise((resolve, reject) => {
-	$.get(url(sheet), { location, accommodation, status, note })
+	$.get(url(), { x: sheet, l: location, a: accommodation, s: status, n: note })
 		.done((row) => {
 			const data = JSON.parse(storage.getItem(sheet));
-			Object.assign(data.locations[location].accommodations[accommodation], row);
+			data.locations[location].accommodations[accommodation] = row;
 			storage.setItem(sheet, JSON.stringify(data));
 			resolve(row);
 		})
@@ -95,11 +88,11 @@ export const setSheet = (sheet, location, accommodation, status, note) => new Pr
 export const importConfig = async (hash) => {
 	const [ deployment, ...sheets ] = hash.split('+');
 
-	config.deployment = deployment;
+	config.deployment = deployment.substr(1);
 	saveConfig();
 
 	for (const item of config.sheets.slice()) {
-		if (sheets.find(item.sheet))
+		if (!sheets.find(sheet => sheet == item.sheet))
 			removeSheet(item.sheet);
 	}
 

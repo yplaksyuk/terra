@@ -60,10 +60,14 @@ input {
     top: 0;
 	background: white;
 }
+.screen-header > :first-child {
+	flex-grow: 1;
+}
 
 .screen-header button {
 	color: white;
 	background-color: blue;
+	margin: .2em;
 }
 
 .status-button {
