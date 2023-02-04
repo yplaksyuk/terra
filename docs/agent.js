@@ -58,7 +58,7 @@ export const removeSheet = (sheet) => {
 export const readSheet = (sheet) => JSON.parse(storage.getItem(sheet));
 
 export const refreshSheet = async (sheet) => {
-	const item = config.sheets.find(item => item.sheet = sheet);
+	const item = config.sheets.find(item => item.sheet == sheet);
 	if (item) {
 		const data = await getSheet(sheet);
 		if (item.name != data.name) {
