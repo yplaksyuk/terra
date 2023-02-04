@@ -38,7 +38,7 @@ label:after {
 }
 
 input {
-	width: 100%;
+	width: calc(100% - 1em);
 }
 
 .screen {
