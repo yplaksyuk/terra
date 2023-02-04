@@ -29,6 +29,7 @@ input, button {
 
 label {
 	display: block;
+	font-weight: bold;
 	margin-top: .5em;
 }
 
@@ -58,7 +59,10 @@ input {
     align-items: center;
     position: sticky;
     top: 0;
-	background: white;
+	background: rgba(255, 255, 255, 0.75);
+	-webkit-backdrop-filter: blur(2em);
+	backdrop-filter: blur(2em);
+	z-index: 900;
 }
 .screen-header > :first-child {
 	flex-grow: 1;
@@ -78,12 +82,7 @@ input {
 	border-radius: .3em;
 	aspect-ratio: 1;
 	cursor: pointer;
-}
-
-.status-button1:after {
-	content: '';
-	display: block;
-	padding-bottom: 100%;
+	z-index: 10;
 }
 
 .status-button.current {
@@ -129,6 +128,42 @@ input {
 	display: inline-block;
 }
 
+.settings-sheet-box {
+	display: flex;
+	padding: .5em 0;
+}
+
+.settings-sheet-box > * {
+	height: 2em;
+}
+
+.settings-sheet-box > :first-child {
+	flex-grow: 1;
+}
+
+.settings-sheet-box > .sheet-name {
+	line-height: 2em;
+	border-bottom: 1px dashed;
+}
+
+.sheet-button {
+	display: inline-block;
+	width: 2em;
+	height: 2em;
+	line-height: 2em;
+	margin-left: 1em;
+	text-align: center;
+	text-decoration: none;
+}
+
+.sheet-button-add {
+	color: green;
+}
+
+.sheet-button-remove {
+	color: red;
+}
+
 .dialog {
 	display: none;
 	position: fixed;
@@ -136,10 +171,22 @@ input {
 	height: 100vh;
 	background-color: rgba(0, 0, 0, 0.271);
 	top: 0;
+	z-index: 1000;
 }
 
 .dialog.dialog-shown {
 	display: block;
+}
+
+#main-locations {
+	display: flex;
+	flex-direction: column;
+}
+
+#main-locations > button {
+	padding: 1em .5em;
+	margin: .5em 0;
+	background-color: lightgray;
 }
 
 #visits-title {
@@ -147,7 +194,7 @@ input {
 }
 
 #visits-title:before {
-	content: '< ';
+	content: '↩︎ ';
 }
 #visits-accommodations {
 	display: grid;

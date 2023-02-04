@@ -42,8 +42,10 @@
 			<div>
 				<label>Участки</label>
 				<div id="settings-sheets"></div>
-				<input id="settings-href" type="url" placeholder="Google Sheet URL" required />
-				<a href="" id="settings-add">+</a>
+				<div class="settings-sheet-box">
+					<input id="settings-href" type="url" placeholder="Google Sheet URL" required />
+					<a href="" id="settings-add" class="sheet-button-add sheet-button">✔︎</a>
+				</div>
 			</div>
 		</section>
 
@@ -73,9 +75,9 @@
 		</template>
 
 		<template id="sheet-template">
-			<div class="sheet">
+			<div class="settings-sheet-box">
 				<span class="sheet-name"></span>
-				<a href="" class="sheet-remove">-</a>
+				<a href="" class="sheet-button-remove sheet-button">✖︎</a>
 			</div>
 		</template>
 	</body>

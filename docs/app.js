@@ -48,7 +48,7 @@ const updateSheets = () => {
 	agent.getSheets().forEach(item => {
 		template.contents().clone()
 			.find('.sheet-name').text(item.name).end()
-			.find('.sheet-remove').data('sheet', item.sheet).end()
+			.find('.sheet-button-remove').data('sheet', item.sheet).end()
 			.appendTo(container);
 	});
 
@@ -69,6 +69,8 @@ $(function() {
 		Object.assign(state, item);
 		updateVisits(item.sheet, item.location);
 		showScreen('visits');
+
+		refreshVisits();
 	});
 
 	$('#visits-title')
@@ -93,7 +95,7 @@ $(function() {
 		.on('change', function() { agent.setDeployment($(this).val()); })
 		.on('sync', function() { $(this).val(agent.getDeployment()); });
 
-	$('#settings-sheets').on('click', '.sheet-remove', function(event) {
+	$('#settings-sheets').on('click', '.sheet-button-remove', function(event) {
 		event.preventDefault();
 
 		agent.removeSheet($(this).data('sheet'));
@@ -111,6 +113,8 @@ $(function() {
 				agent.addSheet(m[1]).then(() => {
 					updateSheets();
 					updateLocations();
+
+					$('#settings-href').val('');
 				});
 			}
 		});
@@ -155,7 +159,7 @@ $(function() {
 		agent.importConfig(location.hash)
 			.then(() => {
 				window.history.replaceState(null, '', location.origin + location.pathname);
-				init();
+				window.location.reload();
 			})
 			.catch(init);
 	else
