@@ -97,7 +97,9 @@ export const importConfig = async (hash) => {
 	}
 
 	for (const sheet of sheets) {
-		if (!config.sheets.find(item => item.sheet == sheet))
-			await addSheet(sheet);
+		if (!config.sheets.find(item => item.sheet == sheet)) {
+			const local = new String(sheet);
+			await addSheet(local);
+		}
 	}
 };
