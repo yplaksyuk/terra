@@ -9,6 +9,7 @@
     "https": "^1.0.0"
   },
   "scripts": {
+    "certs": "openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout selfsigned.key -out selfsigned.crt -subj \"/C=UA/ST=KV/L=Kyiv/CN=localhost\"",
     "start": "node main.js"
   },
   "repository": {
