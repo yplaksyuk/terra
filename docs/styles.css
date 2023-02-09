@@ -72,6 +72,8 @@ input {
 	color: white;
 	background-color: blue;
 	margin: .2em;
+	font-size: 1.1em;
+	min-width: 2em;
 }
 
 .status-button {
@@ -198,6 +200,7 @@ input {
 #visits-title:before {
 	content: '↩︎ ';
 }
+
 #visits-accommodations {
 	display: grid;
 	gap: .5em;
