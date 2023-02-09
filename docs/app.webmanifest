@@ -1,0 +1,20 @@
+{
+	"name": "Terra Web App",
+	"short_name": "Terra",
+	"description": "JW Territory service frontend",
+	"icons": [
+		{
+			"src": "icons/app-icon-48.png",
+			"sizes": "48x48",
+			"type": "image/png"
+		},
+		{
+			"src": "icons/app-icon-96.png",
+			"sizes": "96x96",
+			"type": "image/png"
+		}
+	],
+	"start_url": "index.html",
+	"display": "fullscreen"
+}
+

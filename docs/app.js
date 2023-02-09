@@ -1,6 +1,10 @@
 import * as agent from './agent.js';
 //import * as util from './util.js';
 
+if ('serviceWorker' in navigator) {
+	navigator.serviceWorker.register('./worker.js', { type: 'module' });
+}
+
 const state = { sheet: '', location: 0, accommodation: 0 };
 let plate;
 
