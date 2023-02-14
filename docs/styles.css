@@ -209,14 +209,16 @@ input {
 }
 
 #status-dialog .dialog-frame {
-	width: 20em;
+	max-width: 20em;
 	margin: 5em auto;
 	padding: .5em;
 	background-color: white;
+	border-radius: .5em;
 }
 
 #status-dialog .status-no {
-	text-align: center;
+	font-size: 1.1em;
+	margin-left: 1em;
 }
 
 #status-dialog .status-menu {
