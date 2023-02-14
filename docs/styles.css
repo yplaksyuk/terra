@@ -99,7 +99,8 @@ input {
 
 .accommodation span {
     position: absolute;
-    margin: .5em;
+    margin: .4em;
+	font-size: .9em;
 }
 
 .accommodation span.initials {
@@ -203,7 +204,7 @@ input {
 #visits-accommodations {
 	display: grid;
 	gap: .5em;
-	grid-template-columns: repeat(auto-fill, minmax(5em, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(4.5em, 1fr));
 	z-index: -1;
 }
 
