@@ -15,4 +15,4 @@ app.get('/*', express.static(`./docs`));
 const server = https.createServer(creds, app);
 server.listen(PORT);
 
-console.log(`Server started on port ${PORT}`);
+console.log(`Server started at https://localhost:${PORT}/`);
