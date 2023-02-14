@@ -1,5 +1,5 @@
 import * as agent from './agent.js';
-//import * as util from './util.js';
+import * as util from './util.js';
 
 if ('serviceWorker' in navigator) {
 	navigator.serviceWorker.register('./worker.js', { type: 'module' });
@@ -26,6 +26,15 @@ const updateLocations = () => {
 	});
 };
 
+const updateAccommodation = (elem, accommodation) => {
+	const aux = util.parseNote(accommodation.note);
+
+	return elem.attr('data-status', accommodation.status)
+		.find('.no').text(accommodation.no).end()
+		.find('.status').text(accommodation.status).end()
+		.find('.modify-date').text(util.formatDate(aux.modifyDate)).end();
+};
+
 const updateVisits = (sheet, location) => {
 	const data = agent.readSheet(sheet);
 
@@ -36,11 +45,8 @@ const updateVisits = (sheet, location) => {
 
 	for (let index = 0; index < data.locations[location].accommodations.length; ++index) {
 		const accommodation = data.locations[location].accommodations[index];
-		template.contents().clone()
-			.data('accommodation', index)
-			.attr('data-status', accommodation.status)
-			.find('.no').text(accommodation.no).end()
-			.find('.status').text(accommodation.status).end()
+
+		updateAccommodation(template.contents().clone().data('accommodation', index), accommodation)
 			.appendTo(container);
 	}
 };
@@ -140,9 +146,9 @@ $(function() {
 	$('#status-dialog')
 		.on('click', '.status-button', function() {
 			if ($(this).not('.current')) {
-				agent.setSheet(state.sheet, state.location, state.accommodation, $(this).data('status'))
+				agent.setSheet(state.sheet, state.location, state.accommodation, $(this).data('status'), util.formatNote())
 					.then((row) => {
-						plate.attr('data-status', row.status).find('.status').text(row.status);
+						updateAccommodation(plate, row);
 					});
 			}
 		})
