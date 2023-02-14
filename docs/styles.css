@@ -69,10 +69,10 @@ input {
 }
 
 .screen-header button {
-	color: white;
-	background-color: blue;
+	color: blue;
+	background-color: transparent;
 	margin: .2em;
-	font-size: 1.1em;
+	font-size: 1.2em;
 	min-width: 2em;
 }
 
