@@ -33,6 +33,9 @@ export const getDeployment = () => config.deployment;
 
 export const setDeployment = (deployment) => { config.deployment = deployment; saveConfig(); };
 
+/**
+ * Returns an array of { sheet, name } objects.
+ */
 export const getSheets = () => config.sheets;
 
 export const addSheet = async (sheet) => {

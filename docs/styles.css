@@ -88,7 +88,7 @@ input {
 }
 
 .status-button.current {
-    box-shadow: inset 0px 0px 0px 3px rgba(122,122,122,1);
+    box-shadow: inset 0px 0px 0px 4px lightgreen;
 }
 
 .accommodation {
