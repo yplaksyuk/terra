@@ -31,7 +31,7 @@ const statusDialog = {
 		let timer = null;
 
 		$('#status-dialog')
-			.on('mousedown', '.status-button', function() {
+			.on('mousedown', '.status-button', function(event) {
 				const button = $(this);
 
 				if (button.is('.current')) {
@@ -49,6 +49,9 @@ const statusDialog = {
 						}, 3000);
 					}
 				}
+
+				event.stopPropagation();
+				event.preventDefault();
 			})
 			.on('mouseup', '.status-button', function() {
 				clearTimeout(timer);
