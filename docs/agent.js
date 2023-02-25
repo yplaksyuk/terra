@@ -22,9 +22,11 @@ const url = () => {
 };
 
 const getSheet = (sheet) => new Promise((resolve, reject) => {
+	console.log(`Get sheet ${sheet}`);
+
 	$.get(url(), { x: sheet })
 		.done((data) => { storage.setItem(sheet, JSON.stringify(data)); resolve(data); })
-		.fail(() => { reject(); });
+		.fail(() => { console.error(`Get sheet ${sheet} failed.`); reject(); });
 });
 
 export const ok = () => config.deployment && true;
@@ -39,6 +41,8 @@ export const setDeployment = (deployment) => { config.deployment = deployment; s
 export const getSheets = () => config.sheets;
 
 export const addSheet = async (sheet) => {
+	console.log(`Add sheet ${sheet}`);
+
 	if (config.sheets.find(item => item.sheet == sheet))
 		throw Error('sheet already exists.');
 
@@ -49,6 +53,8 @@ export const addSheet = async (sheet) => {
 };
 
 export const removeSheet = (sheet) => {
+	console.log(`Remove sheet ${sheet}`);
+
 	const index = config.sheets.findIndex(item => item.sheet == sheet);
 	if (index >= 0) {
 		config.sheets.splice(index, 1);
@@ -89,6 +95,8 @@ export const setSheet = (sheet, location, accommodation, status, note) => new Pr
 });
 
 export const importConfig = async (hash) => {
+	console.log('Importing config');
+
 	const [ deployment, ...sheets ] = hash.split('+');
 
 	config.deployment = deployment.substr(1);
