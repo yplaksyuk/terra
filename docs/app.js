@@ -31,7 +31,7 @@ const statusDialog = {
 		let timer = null;
 
 		$('#status-dialog')
-			.on('mousedown', '.status-button', function(event) {
+			.on('mousedown touchstart', '.status-button', function(event) {
 				const button = $(this);
 
 				if (button.is('.current')) {
@@ -53,7 +53,7 @@ const statusDialog = {
 				event.stopPropagation();
 				event.preventDefault();
 			})
-			.on('mouseup', '.status-button', function() {
+			.on('mouseup touchend touchcancel', '.status-button', function() {
 				clearTimeout(timer);
 			})
 			.on('click', '.status-button', function() {
