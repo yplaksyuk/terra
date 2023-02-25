@@ -3,10 +3,7 @@ body {
 	font-size: 12pt;
     color: rgb(77, 77, 77);
     margin: 0;
-
-    position: absolute;
-	height: 100vh;
-	width: 100vw;
+    position: relative;
 }
 
 body[data-screen="main"] .screen#main-screen,
@@ -47,9 +44,7 @@ input {
 
 .screen {
 	display: none;
-	height: 100vh;
 	padding: 0 .2em;
-	overflow-y: auto;
 }
 
 @media screen and (min-width: 900px) {
@@ -220,6 +215,10 @@ input {
 	gap: .5em;
 	grid-template-columns: repeat(auto-fill, minmax(4.5em, 1fr));
 	z-index: -1;
+}
+
+#loading-screen {
+	height: 100vh;
 }
 
 #loading-screen > p {
