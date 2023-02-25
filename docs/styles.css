@@ -83,6 +83,7 @@ input {
 	padding: .3em;
 	border-radius: .3em;
 	aspect-ratio: 1;
+	user-select: none;
 	cursor: pointer;
 	z-index: 10;
 }
