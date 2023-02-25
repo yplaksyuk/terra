@@ -3,12 +3,16 @@ body {
 	font-size: 12pt;
     color: rgb(77, 77, 77);
     margin: 0;
-    position: relative;
+
+    position: absolute;
+	height: 100vh;
+	width: 100vw;
 }
 
 body[data-screen="main"] .screen#main-screen,
 body[data-screen="visits"] .screen#visits-screen,
-body[data-screen="settings"] .screen#settings-screen {
+body[data-screen="settings"] .screen#settings-screen,
+body[data-screen="loading"] .screen#loading-screen {
 	display: block;
 }
 
@@ -43,7 +47,9 @@ input {
 
 .screen {
 	display: none;
-	padding: .2em;
+	height: 100vh;
+	padding: 0 .2em;
+	overflow-y: auto;
 }
 
 @media screen and (min-width: 900px) {
@@ -187,7 +193,7 @@ input {
 }
 
 #main-locations > button {
-	padding: 1.5em .5em;
+	padding: 1em .5em;
 	margin: .2em 0;
 	background-color: lightgray;
 	font-size: 1.2em;
@@ -207,6 +213,16 @@ input {
 	gap: .5em;
 	grid-template-columns: repeat(auto-fill, minmax(4.5em, 1fr));
 	z-index: -1;
+}
+
+#loading-screen > p {
+	display: table-cell;
+	height: 100vh;
+	width: 100vw;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 16pt;
+	font-weight: bold;
 }
 
 #status-dialog .dialog-frame {

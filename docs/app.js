@@ -107,16 +107,18 @@ const visitsScreen = {
 	},
 
 	show: function(item) {
+		showScreen('visits');
+
 		if (this.item?.sheet != item.sheet || this.item?.l != item.l) {
 			this.item = item;
 
+			// reload whole contents
+			this.container.closest('.screen').each(function() { this.scroll({ top: 0, left: 0 }); });
 			this.container.empty();
 			this.update();
 		}
 
 		this.refresh();
-
-		showScreen('visits');
 	},
 
 	update: function() {
@@ -246,12 +248,15 @@ const settingsScreen = {
 };
 
 $(function() {
-	if (location.hash)
+	if (location.hash) {
+		showScreen('loading');
+
 		agent.importConfig(location.hash)
 			.then(() => {
 				window.history.replaceState(null, '', location.origin + location.pathname);
 				window.location.reload();
 			});
+	}
 	else {
 		mainScreen.init();
 		visitsScreen.init();
