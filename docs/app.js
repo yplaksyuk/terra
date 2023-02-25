@@ -53,13 +53,15 @@ const statusDialog = {
 				event.stopPropagation();
 				event.preventDefault();
 			})
-			.on('mouseup touchend touchcancel', '.status-button', function() {
+			.on('mouseup touchend touchcancel', '.status-button', function(event) {
 				clearTimeout(timer);
-			})
-			.on('click', '.status-button', function() {
+
 				const status = $(this).filter('.current').attr('data-status') || '';
 				if (status != (self.tile.attr('data-status') || ''))
 					self.setStatus(status);
+
+				event.stopPropagation();
+				event.preventDefault();
 			})
 			.on('click', function() {
 				$(this).removeClass('dialog-shown');
