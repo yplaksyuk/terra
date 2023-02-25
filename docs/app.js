@@ -252,8 +252,6 @@ const settingsScreen = {
 };
 
 $(function() {
-		showScreen('loading');
-	return;
 	if (location.hash) {
 		showScreen('loading');
 
