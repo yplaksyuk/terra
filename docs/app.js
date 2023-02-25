@@ -62,9 +62,11 @@ const statusDialog = {
 
 				event.stopPropagation();
 				event.preventDefault();
+
+				$('#status-dialog').removeClass('dialog-shown');
 			})
 			.on('click', function() {
-				$(this).removeClass('dialog-shown');
+				$('#status-dialog').removeClass('dialog-shown');
 			});
 	},
 
