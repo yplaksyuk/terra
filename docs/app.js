@@ -90,23 +90,30 @@ const statusDialog = {
 };
 
 const visitsScreen = {
+	container: null,
 	item: null,
 
 	init: function() {
 		const self = this;
 
+		this.container = $('#visits-accommodations');
+
 		$('#visits-title').on('click', () => { showScreen('main'); });
 		$('#visits-refresh').on('click', () => { this.refresh(); });
 
-		$('#visits-accommodations').on('click', '.accommodation', function() {
+		this.container.on('click', '.accommodation', function() {
 			statusDialog.open($(this), self.item);
 		});
-
 	},
 
 	show: function(item) {
-		this.item = item;
-		this.update();
+		if (this.item?.sheet != item.sheet || this.item?.l != item.l) {
+			this.item = item;
+
+			this.container.empty();
+			this.update();
+		}
+
 		this.refresh();
 
 		showScreen('visits');
@@ -117,13 +124,21 @@ const visitsScreen = {
 
 		$('#visits-title').text(data.locations[this.item.l].name);
 
-		const container = $('#visits-accommodations').empty();
-		const template = $('#accommodation-template');
-
 		const accommodations = data.locations[this.item.l].accommodations;
-		for (let a = 0; a < accommodations.length; ++a) {
-			updateTile(template.contents().clone().data('accommodation', a), accommodations[a])
-				.appendTo(container);
+		const tiles = this.container.children();
+
+		if (tiles.length != accommodations.length) {
+			this.container.empty();
+
+			const template = $('#accommodation-template');
+			for (let a = 0; a < accommodations.length; ++a) {
+				updateTile(template.contents().clone().data('accommodation', a), accommodations[a])
+					.appendTo(this.container);
+			}
+		}
+		else {
+			for (let a = 0; a < accommodations.length; ++a)
+				updateTile($(tiles[a]), accommodations[a])
 		}
 	},
 
