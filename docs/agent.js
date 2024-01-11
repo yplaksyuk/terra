@@ -26,7 +26,7 @@ const getSheet = (sheet) => new Promise((resolve, reject) => {
 
 	$.get(url(), { x: sheet })
 		.done((data) => { storage.setItem(sheet, JSON.stringify(data)); resolve(data); })
-		.fail(() => { console.error(`Get sheet ${sheet} failed.`); reject(); });
+		.fail(() => { regect(new Error(`Get sheet ${sheet} failed.`)); });
 });
 
 export const ok = () => config.deployment && true;
@@ -110,7 +110,9 @@ export const importConfig = async (hash) => {
 	for (const sheet of sheets) {
 		if (!config.sheets.find(item => item.sheet == sheet)) {
 			const local = new String(sheet);
-			await addSheet(local);
+			await addSheet(local).catch((err) => {
+				console.error(err);
+			});
 		}
 	}
 };
