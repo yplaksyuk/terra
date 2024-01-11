@@ -26,7 +26,7 @@ const getSheet = (sheet) => new Promise((resolve, reject) => {
 
 	$.get(url(), { x: sheet })
 		.done((data) => { storage.setItem(sheet, JSON.stringify(data)); resolve(data); })
-		.fail(() => { regect(new Error(`Get sheet ${sheet} failed.`)); });
+		.fail(() => { reject(new Error(`Get sheet ${sheet} failed.`)); });
 });
 
 export const ok = () => config.deployment && true;
