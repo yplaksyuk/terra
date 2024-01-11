@@ -1,3 +1,4 @@
+import * as cookie from './cookie.js';
 import * as agent from './agent.js';
 import * as util from './util.js';
 
@@ -37,7 +38,7 @@ const statusDialog = {
 				if (button.is('.current')) {
 					timer = setTimeout(() => {
 						button.removeClass('current');
-					}, 3000);
+					}, 2000);
 				}
 				else {
 					$('#status-dialog .current').removeClass('current');
@@ -46,7 +47,7 @@ const statusDialog = {
 					if (button.attr('data-status') == refuseStatus) {
 						timer = setTimeout(() => {
 							button.attr('data-status', rudeStatus);
-						}, 3000);
+						}, 2000);
 					}
 				}
 
@@ -251,23 +252,39 @@ const settingsScreen = {
 	}
 };
 
+const initApp = (hash) => {
+	showScreen('loading');
+
+	agent.importConfig(hash)
+		.then(() => {
+			window.history.replaceState(null, '', location.origin + location.pathname);
+			window.location.reload();
+		});
+};
+
+const showApp = (screen) => {
+	mainScreen.init();
+	visitsScreen.init();
+	settingsScreen.init();
+
+	statusDialog.init();
+
+	showScreen(screen);
+};
+
 $(function() {
 	if (location.hash) {
-		showScreen('loading');
-
-		agent.importConfig(location.hash)
-			.then(() => {
-				window.history.replaceState(null, '', location.origin + location.pathname);
-				window.location.reload();
-			});
+		cookie.set('hash', location.hash, 180);
+		initApp(location.hash);
+	}
+	else if (agent.ok()) {
+		showApp('main');
 	}
 	else {
-		mainScreen.init();
-		visitsScreen.init();
-		settingsScreen.init();
-
-		statusDialog.init();
-
-		showScreen(agent.ok() ? 'main' : 'settings');
+		const hash = cookie.get('hash');
+		if (hash)
+			initApp(hash);
+		else
+			showApp('settings');
 	}
 });
