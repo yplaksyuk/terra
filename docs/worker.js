@@ -1,13 +1,14 @@
 /*
- * Sat Feb 25 13:05:23 EET 2023
+ * Thu Jan 11 14:17:23 EET 2024
  */
-const version = 1;
+const version = 2;
 
 const content = [
 	'index.html',
 	'status.css',
 	'styles.css',
 	'app.js',
+	'cookie.js',
 	'agent.js',
 	'util.js',
 	'icons/app-icon-16.png',
