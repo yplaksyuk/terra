@@ -1,0 +1,12 @@
+name: terra
+version: '2'
+
+services:
+  webserver:
+    image: orbis/webserver
+    restart: always
+    build: .
+    ports:
+      - 8443:8443
+    volumes:
+      - ./docs:/code/docs:delegated
