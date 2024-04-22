@@ -69,7 +69,10 @@ const statusDialog = {
 
 				$('#status-dialog').removeClass('dialog-shown');
 			})
-			.on('click', '.status-menu', function() {
+			.on('click', '.status-header', function(event) {
+				event.stopPropagation();
+			})
+			.on('click', function() {
 				$('#status-dialog').removeClass('dialog-shown');
 			});
 	},

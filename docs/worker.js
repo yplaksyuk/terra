@@ -1,7 +1,7 @@
 /*
- * Mon Apr 22 22:48:16 EEST 2024
+ * Mon Apr 22 23:01:18 EEST 2024
  */
-const version = 2;
+const version = 3;
 
 const content = [
 	'index.html',
