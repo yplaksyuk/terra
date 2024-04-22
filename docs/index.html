@@ -59,7 +59,10 @@
 		<div id="status-dialog" class="dialog">
 			<div class="dialog-frame">
 				<div class="dialog-header">
-					<h1 class="status-no"></h1>
+					<h1 class="status-header">
+						<span class="status-no"></span>
+						<label class="status-ring"><input type="checkbox" /><span></span></label>
+					</h1>
 				</div>
 				<div class="status-menu">
 					<div class="status-button" data-status="НД1">НД1</div>
@@ -74,7 +77,7 @@
 
 		<template id="accommodation-template">
 			<div class="accommodation status-button">
-				<span class="initials"></span>
+				<span class="ring"></span>
 				<span class="no"></span>
 				<span class="status"></span>
 				<span class="modify-date"></span>

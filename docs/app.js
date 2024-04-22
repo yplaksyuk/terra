@@ -20,6 +20,7 @@ const updateTile = (tile, accommodation) => {
 	return tile.attr('data-status', status)
 		.find('.no').text(accommodation.no).end()
 		.find('.status').text(status).end()
+		.find('.ring').toggleClass('ring-no', aux.noRing).end()
 		.find('.modify-date').text(util.formatDate(aux.modifyDate)).end();
 };
 
@@ -58,15 +59,17 @@ const statusDialog = {
 				clearTimeout(timer);
 
 				const status = $(this).filter('.current').attr('data-status') || '';
-				if (status != (self.tile.attr('data-status') || ''))
-					self.setStatus(status);
+				const noRing = $('#status-dialog .status-ring input').prop('checked');
+
+				if (status != (self.tile.attr('data-status') || '') || noRing != self.tile.find('.ring').is('.ring-no'))
+					self.setStatus(status, noRing);
 
 				event.stopPropagation();
 				event.preventDefault();
 
 				$('#status-dialog').removeClass('dialog-shown');
 			})
-			.on('click', function() {
+			.on('click', '.status-menu', function() {
 				$('#status-dialog').removeClass('dialog-shown');
 			});
 	},
@@ -83,11 +86,12 @@ const statusDialog = {
 			.filter(`[data-status='${status}']`).addClass('current');
 
 		$('#status-dialog .status-no').text(tile.find('.no').text());
+		$('#status-dialog .status-ring input').prop('checked', tile.find('.ring').is('.ring-no'));
 		$('#status-dialog').addClass('dialog-shown');
 	},
 
-	setStatus: function(status) {
-		agent.setSheet(this.item.sheet, this.item.l, this.tile.data('accommodation'), status, status && util.formatNote() || '')
+	setStatus: function(status, noRing) {
+		agent.setSheet(this.item.sheet, this.item.l, this.tile.data('accommodation'), status, util.formatNote(noRing))
 			.then((row) => {
 				updateTile(this.tile, row);
 			});

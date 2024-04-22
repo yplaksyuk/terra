@@ -28,20 +28,6 @@ input, button {
 	padding: .3em;
 }
 
-label {
-	display: block;
-	font-weight: bold;
-	margin-top: .5em;
-}
-
-label:after {
-	content: ':';
-}
-
-input {
-	width: calc(100% - 1em);
-}
-
 .screen {
 	display: none;
 	padding: 0 .2em;
@@ -52,6 +38,20 @@ input {
 		max-width: 780px;
 		margin: 0 auto;
 	}
+}
+
+.screen label {
+	display: block;
+	font-weight: bold;
+	margin-top: .5em;
+}
+
+.screen label:after {
+	content: ':';
+}
+
+.screen input {
+	width: calc(100% - 1em);
 }
 
 .screen-header {
@@ -112,9 +112,9 @@ input {
 	font-size: .9em;
 }
 
-.accommodation span.initials {
-    left: 0;
-    top: 0;
+.accommodation span.ring {
+    right: 0;
+    bottom: 0;
 }
 
 .accommodation span.status {
@@ -239,9 +239,27 @@ input {
 	border-radius: .5em;
 }
 
+#status-dialog .status-header {
+	display: flex;
+	justify-content: space-between;
+}
+
 #status-dialog .status-no {
 	font-size: 1.1em;
 	margin-left: 1em;
+}
+
+#status-dialog .status-ring input {
+	display: none;
+}
+
+#status-dialog .status-ring span::after {
+	content: '🔔';
+	margin-right: 1em;
+}
+
+#status-dialog .status-ring input:checked ~ span::after, span.ring.ring-no::after {
+	content: '🔕';
 }
 
 #status-dialog .status-menu {
