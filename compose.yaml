@@ -4,7 +4,6 @@ version: '2'
 services:
   webserver:
     image: orbis/webserver
-    restart: always
     build: .
     ports:
       - 8443:8443
