@@ -233,7 +233,12 @@ const settingsScreen = {
 			url += `#${agent.getDeployment()}`;
 			url += agent.getSheets().map(item => `+${item.sheet}`).join('');
 
-			navigator.share({ url });
+			if (typeof navigator.share === 'function')
+				navigator.share({ url });
+			else {
+				navigator.clipboard.writeText(url)
+					.then(() => alert('Ссылка скопирована.'));
+			}
 		});
 
 		$('#settings-save').on('click', function() {
